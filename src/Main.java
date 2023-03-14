@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
+
+    static ArrayList<Takenlijst> takenlijsts = new ArrayList<Takenlijst>();
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        
         String keuzeLijst = "";
         String exit = "";
 
-        ArrayList<Takenlijst> takenlijsts = new ArrayList<Takenlijst>();
+
         while (!exit.equals("0")) {
             while (!keuzeLijst.equals("1")) {
                 System.out.println("Welke service wil je gebruiken?");
@@ -44,6 +47,7 @@ public class Main {
                 System.out.print("Kies: ");
                 keuzeLijst2 = scanner.nextLine();
 
+
                 if (keuzeLijst2.equals("1")) {
                     System.out.println("Hoe wil je de nieuwe takenlijst noemen?");
                     System.out.print("Vul in: ");
@@ -54,15 +58,19 @@ public class Main {
                     System.out.println();
                 }
                 else if (keuzeLijst2.equals("2")) {
-
+                    showTakenlijst();
+                    System.out.println("Kies het nummer in van de takenlijst die je wilt verwijderen");
+                    System.out.print("Kies: ");
+                    int verwijderNummer = scanner.nextInt();
+                    int verwijderIndex = verwijderNummer - 1;
+                    scanner.nextLine();
+                    takenlijsts.remove(verwijderIndex);
+                    System.out.println("takenlijst " + verwijderNummer + " is succesvol verwijdert");
+                    System.out.println();
                 }
                 else if (keuzeLijst2.equals("3")){
                     System.out.println("Hier is je takenlijst");
-                    int teller = 1;
-                    for (Takenlijst doos : takenlijsts) {
-                        System.out.println(teller +". " + doos.getNaam());
-                        teller++;
-                    }
+                    showTakenlijst();
                     System.out.println();
                     System.out.println("Kies 1 om terug te gaan");
                     System.out.print("Kies: ");
@@ -74,9 +82,21 @@ public class Main {
                     }
                 }
                 else if (keuzeLijst2.equals("4")){
-                    for (Takenlijst doos : takenlijsts){
-                        System.out.println(doos);
-                    }
+                    showTakenlijst();
+                    System.out.println("Kies aan welke lijst je een taak wilt toevoegen");
+                    System.out.print("Kies: ");
+                    int taakToevoegen = scanner.nextInt();
+                    int toevoegenIndex = taakToevoegen - 1;
+                    scanner.nextLine();
+                    System.out.println("Hoe heet je nieuwe taak?");
+                    System.out.print("Naam nieuwe taak: ");
+                    String taakNaam = scanner.nextLine();
+                    Takenlijst gekozenTakenlijst = takenlijsts.get(toevoegenIndex);
+                    gekozenTakenlijst.addTaak(taakNaam);
+                    System.out.println("Taak succesvol toegevoegd!");
+
+
+
                 }
 
                 else if (keuzeLijst2.equals("5")) {
@@ -98,4 +118,22 @@ public class Main {
         Takenlijst lijstNaam = new Takenlijst(Steven);
         return lijstNaam;
     }
+
+    public static void showTakenlijst(){
+        int teller = 1;
+        for (Takenlijst doos3 : takenlijsts) {
+            System.out.println(teller +". " + doos3.getNaam());
+            teller++;
+        }
+    }
+
+    /*public static void taakToevoegenAanLijst(String taakNaam){
+        Taak taak = new Taak(taakNaam);
+        takenlijsts.get()
+
+
+
+    }*/
 }
+
+
